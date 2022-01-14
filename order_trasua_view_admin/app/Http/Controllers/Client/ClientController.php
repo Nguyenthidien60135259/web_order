@@ -98,7 +98,7 @@ class ClientController extends Controller
    public function postSignUp(Request $request)
    {
     $validator = Validator::make($request->all(), [
-        'name' => 'required|min:6',
+        'name' => 'required',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|min:6|max:32',
         'passwordAgain' => 'required|same:password',
