@@ -26,7 +26,7 @@
             <form action="search/{key}" method="get" style="margin-left: 60px;" class="navbar-form navbar-left" role="search">
                 @csrf
                 <div class="form-group">
-                    <input name="key" type="text" class="form-control" placeholder="Nhập từ khóa...">
+                    <input required name="key" type="text" class="form-control" placeholder="Nhập từ khóa...">
                 </div>
                 <button type="submit" class="btn btn-primary">Tìm kiếm</button>
             </form>
