@@ -72,18 +72,13 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate(
-            [
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:6|max:32',
-            ],
-            [ //hiển thị thông báo lỗi
-                'email.required' => 'Bạn chưa nhập email',
-                'password.required' => 'Bạn chưa nhập mật khẩu',
-                'password.min' => 'Mật khẩu từ 6 kí tự trở lên',
-                'password.max' => 'Mật khẩu không được quá 32 kí tự'
-            ]
-        );
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:6|max:32'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message'=>$validator->errors()->toJson()], 400);
+        }
         $email = $request->email;
         $user = User::where('email','Like',"%$email%")->first();
         $pas = base64_encode($request->password);
